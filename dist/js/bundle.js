@@ -1368,19 +1368,17 @@ var Game = function () {
   }, {
     key: "onResize",
     value: function onResize() {
-      var _window = window,
-          innerHeight = _window.innerHeight,
-          innerWidth = _window.innerWidth;
-
       var pixelRatio = (0, _utils.getDevicePixelRatio)();
       var backingStoreRatio = (0, _utils.getBackingStorePixelRatio)(this.context);
       this.ratio = pixelRatio / backingStoreRatio;
 
-      this.canvas.height = innerHeight * this.ratio;
-      this.canvas.width = innerWidth * this.ratio;
+      var parentSize = this.canvas.parentElement.offsetWidth;
 
-      this.canvas.style.height = innerHeight + "px";
-      this.canvas.style.width = innerWidth + "px";
+      this.canvas.height = parentSize * this.ratio;
+      this.canvas.width = parentSize * this.ratio;
+
+      this.canvas.style.height = parentSize + "px";
+      this.canvas.style.width = parentSize + "px";
 
       this.context.scale(this.ratio, this.ratio);
 
