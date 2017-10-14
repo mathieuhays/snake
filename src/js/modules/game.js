@@ -17,12 +17,13 @@ export default class Game {
     this.setupDone = false;
     this.isRunning = false;
     this.animationFrame = null;
-    this.grid = new Grid(this.context, 20);
+    this.grid = new Grid(this, 20);
     this.snake = new Snake(this, 20);
     this.framerate = null;
     this.frameDelta = null;
     this.timer = null;
     this.food = [];
+    this.ratio = 1;
 
     this.setFramerate(8); // 24 frame /sec
 
@@ -52,17 +53,15 @@ export default class Game {
     const { innerHeight, innerWidth } = window;
     const pixelRatio = getDevicePixelRatio();
     const backingStoreRatio = getBackingStorePixelRatio(this.context);
-    const ratio = pixelRatio / backingStoreRatio;
+    this.ratio = pixelRatio / backingStoreRatio;
 
-    console.log('onResize', innerHeight, innerWidth, pixelRatio, backingStoreRatio, ratio);
-
-    this.canvas.height = innerHeight * ratio;
-    this.canvas.width = innerWidth * ratio;
+    this.canvas.height = innerHeight * this.ratio;
+    this.canvas.width = innerWidth * this.ratio;
 
     this.canvas.style.height = `${innerHeight}px`;
     this.canvas.style.width = `${innerWidth}px`;
 
-    this.context.scale(ratio, ratio);
+    this.context.scale(this.ratio, this.ratio);
 
     this.snake.setSize(this.grid.getCellSize());
     this.snake.setConstraint(0, this.grid.size - 1);

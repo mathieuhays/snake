@@ -1,6 +1,7 @@
 export default class Grid {
-  constructor(context, size) {
-    this.context = context;
+  constructor(game, size) {
+    this.game = game;
+    this.context = this.game.context;
     this.size = size;
   }
 
@@ -43,6 +44,8 @@ export default class Grid {
       smallestSize = this.context.canvas.height;
     }
 
-    return Math.floor(smallestSize / this.size);
+    let size = Math.floor(smallestSize / this.size);
+
+    return size / this.game.ratio;
   }
 }

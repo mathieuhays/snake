@@ -1331,12 +1331,13 @@ var Game = function () {
     this.setupDone = false;
     this.isRunning = false;
     this.animationFrame = null;
-    this.grid = new _grid2.default(this.context, 20);
+    this.grid = new _grid2.default(this, 20);
     this.snake = new _snake.Snake(this, 20);
     this.framerate = null;
     this.frameDelta = null;
     this.timer = null;
     this.food = [];
+    this.ratio = 1;
 
     this.setFramerate(8); // 24 frame /sec
 
@@ -1373,17 +1374,15 @@ var Game = function () {
 
       var pixelRatio = (0, _utils.getDevicePixelRatio)();
       var backingStoreRatio = (0, _utils.getBackingStorePixelRatio)(this.context);
-      var ratio = pixelRatio / backingStoreRatio;
+      this.ratio = pixelRatio / backingStoreRatio;
 
-      console.log('onResize', innerHeight, innerWidth, pixelRatio, backingStoreRatio, ratio);
-
-      this.canvas.height = innerHeight * ratio;
-      this.canvas.width = innerWidth * ratio;
+      this.canvas.height = innerHeight * this.ratio;
+      this.canvas.width = innerWidth * this.ratio;
 
       this.canvas.style.height = innerHeight + "px";
       this.canvas.style.width = innerWidth + "px";
 
-      this.context.scale(ratio, ratio);
+      this.context.scale(this.ratio, this.ratio);
 
       this.snake.setSize(this.grid.getCellSize());
       this.snake.setConstraint(0, this.grid.size - 1);
@@ -1540,10 +1539,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Grid = function () {
-  function Grid(context, size) {
+  function Grid(game, size) {
     _classCallCheck(this, Grid);
 
-    this.context = context;
+    this.game = game;
+    this.context = this.game.context;
     this.size = size;
   }
 
@@ -1590,7 +1590,9 @@ var Grid = function () {
         smallestSize = this.context.canvas.height;
       }
 
-      return Math.floor(smallestSize / this.size);
+      var size = Math.floor(smallestSize / this.size);
+
+      return size / this.game.ratio;
     }
   }]);
 
