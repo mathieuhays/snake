@@ -5,10 +5,12 @@
 import Grid from "./grid";
 import { Snake, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, MOVE_UP } from "./snake";
 import Food from "./food";
-import { getBackingStorePixelRatio, getDevicePixelRatio } from "./utils";
+import { getBackingStorePixelRatio, getDevicePixelRatio, on } from "./utils";
 import { onKeyPress, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT, ARROW_UP } from "./keyboard";
 import random from "lodash/random";
+import forIn from "lodash/forIn";
 import Point from "./point";
+import Gameover from "./gameover";
 
 export default class Game {
   constructor(canvas) {
@@ -24,6 +26,9 @@ export default class Game {
     this.timer = null;
     this.food = [];
     this.ratio = 1;
+    this.screens = {
+      gameover: new Gameover(document.querySelector(".js-gameover"))
+    };
 
     this.setFramerate(8); // 24 frame /sec
 
@@ -44,9 +49,32 @@ export default class Game {
     window.addEventListener("resize", this.onResize);
     document.addEventListener("visibilitychange", this.onVisibilityChange);
 
+    this.registerActions();
+
     if (!this.setupDone) {
       this.setup();
     }
+  }
+
+  closeScreens() {
+    forIn(this.screens, (screen) => {
+      screen.disable();
+    });
+  }
+
+  reset() {
+    this.closeScreens();
+    this.snake.reset();
+    this.food = [];
+  }
+
+  registerActions() {
+    on(".js-start", "click", () => {
+      console.log('start trigger');
+
+      this.reset();
+      this.start();
+    });
   }
 
   onResize() {
@@ -85,6 +113,8 @@ export default class Game {
   gameover() {
     this.stop();
 
+    this.screens.gameover.enable();
+
     // @TODO add gameover animation
   }
 
@@ -117,10 +147,6 @@ export default class Game {
       } else if (key === ARROW_RIGHT) {
         this.snake.move(MOVE_RIGHT);
       }
-    });
-
-    window.addEventListener('click', () => {
-      this.snake.eat();
     });
   }
 

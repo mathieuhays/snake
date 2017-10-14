@@ -20,3 +20,18 @@ export function getDevicePixelRatio() {
 
   return window.devicePixelRatio || defaultRatio;
 }
+
+
+export function on(selector, event, callback) {
+  const elements = document.querySelectorAll(selector);
+
+  if (!elements.length) {
+    return false;
+  }
+
+  for (let i = 0, len = elements.length; i < len; i++) {
+    elements[i].addEventListener(event, callback);
+  }
+
+  return true;
+}
