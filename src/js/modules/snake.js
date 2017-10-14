@@ -111,6 +111,20 @@ export class Snake {
     this.hasEaten = true;
   }
 
+  hitsTail() {
+    if (!this.body.length) {
+      return false;
+    }
+
+    for (let i = 0, len = this.body.length; i < len; i++) {
+      if (this.position.equals(this.body[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   update(delta) {
     //. update position
 
@@ -137,6 +151,10 @@ export class Snake {
       // remove last element of the tail if the snake didn't eat
       if (this.body.length && !this.hasEaten) {
         this.body.pop();
+      }
+
+      if (this.hitsTail()) {
+        this.game.gameover();
       }
 
       // add head to the body

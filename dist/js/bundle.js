@@ -1746,6 +1746,21 @@ var Snake = exports.Snake = function () {
       this.hasEaten = true;
     }
   }, {
+    key: "hitsTail",
+    value: function hitsTail() {
+      if (!this.body.length) {
+        return false;
+      }
+
+      for (var i = 0, len = this.body.length; i < len; i++) {
+        if (this.position.equals(this.body[i])) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
     key: "update",
     value: function update(delta) {
       //. update position
@@ -1773,6 +1788,10 @@ var Snake = exports.Snake = function () {
         // remove last element of the tail if the snake didn't eat
         if (this.body.length && !this.hasEaten) {
           this.body.pop();
+        }
+
+        if (this.hitsTail()) {
+          this.game.gameover();
         }
 
         // add head to the body
