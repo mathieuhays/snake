@@ -97,7 +97,11 @@ export default class Game {
   }
 
   onVisibilityChange() {
-
+    if (document.hidden) {
+      this.stop();
+    } else {
+      this.start();
+    }
   }
 
   start() {

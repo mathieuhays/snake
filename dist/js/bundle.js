@@ -1554,7 +1554,13 @@ var Game = function () {
     }
   }, {
     key: "onVisibilityChange",
-    value: function onVisibilityChange() {}
+    value: function onVisibilityChange() {
+      if (document.hidden) {
+        this.stop();
+      } else {
+        this.start();
+      }
+    }
   }, {
     key: "start",
     value: function start() {
