@@ -1822,6 +1822,7 @@ var Snake = exports.Snake = function () {
     this.size = size;
     this.constraint = null;
     this.hasEaten = false;
+    this.isPending = false; // whether the user triggered an action but haven't been executed yet. see #3
 
     this.reset();
   }
@@ -1870,12 +1871,18 @@ var Snake = exports.Snake = function () {
   }, {
     key: "move",
     value: function move(dir) {
+      if (this.isPending) {
+        return;
+      }
+
       if (!this.isValidMove(dir)) {
         return;
       }
 
       this.speed.x = dir[0];
       this.speed.y = dir[1];
+
+      this.isPending = true;
     }
   }, {
     key: "setSize",
@@ -1943,6 +1950,7 @@ var Snake = exports.Snake = function () {
     key: "update",
     value: function update(delta) {
       //. update position
+      this.isPending = false;
 
       // update head position
       this.position.x += this.speed.x;
