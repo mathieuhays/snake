@@ -5,6 +5,7 @@
 html,
 body {
   background: #333;
+  color: #fff;
   padding: 0;
   height: 100%;
 }
@@ -23,4 +24,20 @@ body {
 canvas {
   display: inline-block;
   vertical-align: baseline;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.game {
+  &__wrapper {
+    //.
+  }
+
+  &__canvas {
+    width: 100%;
+  }
 }
