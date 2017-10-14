@@ -12,13 +12,22 @@ export const MOVE_LEFT = [ -1, 0 ];
 
 export class Snake {
   constructor(game, size) {
-    this.body = [];
-    this.speed = new Point(0, 0);
-    this.position = new Point(0, 0);
+    this.body = null;
+    this.speed = null;
+    this.position = null;
     this.game = game;
     this.context = this.game.context;
     this.size = size;
     this.constraint = null;
+    this.hasEaten = false;
+
+    this.reset();
+  }
+
+  reset() {
+    this.body = [];
+    this.speed = new Point(0, 0);
+    this.position = new Point(0, 0);
     this.hasEaten = false;
   }
 
