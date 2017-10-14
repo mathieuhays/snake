@@ -141,6 +141,8 @@ export class Snake {
 
       // add head to the body
       this.body.unshift(new Point(this.position.x, this.position.y));
+    } else {
+      this.game.gameover();
     }
 
     // reset
