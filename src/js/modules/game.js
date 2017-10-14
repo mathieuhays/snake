@@ -81,6 +81,12 @@ export default class Game {
     cancelAnimationFrame(this.animationFrame);
   }
 
+  gameover() {
+    this.stop();
+
+    // @TODO add gameover animation
+  }
+
   // handle current frame and call the next one
   run() {
     if (this.shouldUpdate()) {

@@ -1402,6 +1402,13 @@ var Game = function () {
       this.isRunning = false;
       cancelAnimationFrame(this.animationFrame);
     }
+  }, {
+    key: "gameover",
+    value: function gameover() {
+      this.stop();
+
+      // @TODO add gameover animation
+    }
 
     // handle current frame and call the next one
 
@@ -1770,6 +1777,8 @@ var Snake = exports.Snake = function () {
 
         // add head to the body
         this.body.unshift(new _point2.default(this.position.x, this.position.y));
+      } else {
+        this.game.gameover();
       }
 
       // reset
