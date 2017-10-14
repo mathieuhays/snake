@@ -171,7 +171,7 @@ export class Snake {
     if (this.body.length) {
       this.context.fillStyle = "#fff";
 
-      for (let i = 0, len = this.body.length; i < len; i++) {
+      for (let i = this.body.length - 1; i >= 0; i--) {
         if (i === 0) {
           this.drawHead(this.body[i]);
         } else {
