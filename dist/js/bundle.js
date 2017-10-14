@@ -1809,7 +1809,7 @@ var Snake = exports.Snake = function () {
       if (this.body.length) {
         this.context.fillStyle = "#fff";
 
-        for (var i = 0, len = this.body.length; i < len; i++) {
+        for (var i = this.body.length - 1; i >= 0; i--) {
           if (i === 0) {
             this.drawHead(this.body[i]);
           } else {
