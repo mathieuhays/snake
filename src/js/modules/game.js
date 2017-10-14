@@ -19,7 +19,7 @@ export default class Game {
     this.setupDone = false;
     this.isRunning = false;
     this.animationFrame = null;
-    this.grid = new Grid(this, 20);
+    this.grid = new Grid(this, 21);
     this.snake = new Snake(this, 20);
     this.framerate = null;
     this.frameDelta = null;

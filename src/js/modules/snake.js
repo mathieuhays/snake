@@ -11,13 +11,13 @@ export const MOVE_RIGHT = [ 1, 0 ];
 export const MOVE_LEFT = [ -1, 0 ];
 
 export class Snake {
-  constructor(game, size) {
+  constructor(game) {
     this.body = null;
     this.speed = null;
     this.position = null;
     this.game = game;
+    this.size = this.game.grid.getCellSize();
     this.context = this.game.context;
-    this.size = size;
     this.constraint = null;
     this.hasEaten = false;
     this.isPending = false; // whether the user triggered an action but haven't been executed yet. see #3
@@ -26,9 +26,11 @@ export class Snake {
   }
 
   reset() {
+    const center = Math.floor(this.game.grid.size / 2);
+
     this.body = [];
     this.speed = new Point(0, 0);
-    this.position = new Point(0, 0);
+    this.position = new Point(center, center);
     this.hasEaten = false;
   }
 

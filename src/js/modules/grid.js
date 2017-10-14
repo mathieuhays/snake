@@ -44,7 +44,7 @@ export default class Grid {
       smallestSize = this.context.canvas.height;
     }
 
-    let size = Math.floor(smallestSize / this.size);
+    let size = smallestSize / this.size;
 
     return size / this.game.ratio;
   }

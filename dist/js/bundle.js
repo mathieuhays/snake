@@ -1467,7 +1467,7 @@ var Game = function () {
     this.setupDone = false;
     this.isRunning = false;
     this.animationFrame = null;
-    this.grid = new _grid2.default(this, 20);
+    this.grid = new _grid2.default(this, 21);
     this.snake = new _snake.Snake(this, 20);
     this.framerate = null;
     this.frameDelta = null;
@@ -1766,7 +1766,7 @@ var Grid = function () {
         smallestSize = this.context.canvas.height;
       }
 
-      var size = Math.floor(smallestSize / this.size);
+      var size = smallestSize / this.size;
 
       return size / this.game.ratio;
     }
@@ -1811,15 +1811,15 @@ var MOVE_RIGHT = exports.MOVE_RIGHT = [1, 0];
 var MOVE_LEFT = exports.MOVE_LEFT = [-1, 0];
 
 var Snake = exports.Snake = function () {
-  function Snake(game, size) {
+  function Snake(game) {
     _classCallCheck(this, Snake);
 
     this.body = null;
     this.speed = null;
     this.position = null;
     this.game = game;
+    this.size = this.game.grid.getCellSize();
     this.context = this.game.context;
-    this.size = size;
     this.constraint = null;
     this.hasEaten = false;
     this.isPending = false; // whether the user triggered an action but haven't been executed yet. see #3
@@ -1830,9 +1830,11 @@ var Snake = exports.Snake = function () {
   _createClass(Snake, [{
     key: "reset",
     value: function reset() {
+      var center = Math.floor(this.game.grid.size / 2);
+
       this.body = [];
       this.speed = new _point2.default(0, 0);
-      this.position = new _point2.default(0, 0);
+      this.position = new _point2.default(center, center);
       this.hasEaten = false;
     }
   }, {
