@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Snake</title>
+
+  <link rel="stylesheet" href="dist/css/main.css"/>
+
+  <!-- bootstraper - inject from dist/js/bootstraper.min.js - source in /src/js/bootstraper.js -->
+	<script>!function(){"use strict";function e(){var e=document.getElementsByTagName("script")[0],l=document.createElement("script");l.async=!0,l.src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default&callback=MH.polyfillReady",e.parentNode.insertBefore(l,e)}function l(){n.polyfillReady=!0}var n={done:!1,callbacks:[],pointer:null,intervalTiming:100,polyfillReady:!1};"keys"in Object?l():e(),n.pointer=setInterval(function(){"complete"!==document.readyState&&"interactive"!==document.readyState||!n.polyfillReady||(clearInterval(n.pointer),n.done=!0,n.callbacks.length&&n.callbacks.forEach(function(e){e()}))},n.intervalTiming),window.MH={onReady:function(e){n.done?e():n.callbacks.push(e)},polyfillReady:l}}();</script>
+  <!-- main code -->
+  <script src="dist/js/bundle.js"></script>
+</head>
+<body>
+	<canvas id="game-canvas"></canvas>
+</body>
+</html>
