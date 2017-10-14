@@ -85,8 +85,6 @@ export default class Game {
   // handle current frame and call the next one
   run() {
     if (this.shouldUpdate()) {
-      console.log('render frame');
-
       // Update first
       this.update();
 

@@ -1410,8 +1410,6 @@ var Game = function () {
     key: "run",
     value: function run() {
       if (this.shouldUpdate()) {
-        console.log('render frame');
-
         // Update first
         this.update();
 
@@ -4653,7 +4651,6 @@ var Food = function () {
   }, {
     key: "draw",
     value: function draw() {
-      console.log(this.position, this.game.grid.size);
       var size = this.game.grid.getCellSize();
 
       this.game.context.beginPath();

@@ -14,7 +14,6 @@ export default class Food {
   }
 
   draw() {
-    console.log(this.position, this.game.grid.size);
     const size = this.game.grid.getCellSize();
 
     this.game.context.beginPath();
