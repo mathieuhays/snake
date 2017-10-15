@@ -9,6 +9,7 @@ export const MOVE_DOWN = [ 0, 1 ];
 export const MOVE_UP = [ 0, -1 ];
 export const MOVE_RIGHT = [ 1, 0 ];
 export const MOVE_LEFT = [ -1, 0 ];
+export const MOVE_IDLE = [ 0, 0 ];
 
 export class Snake {
   constructor(game) {

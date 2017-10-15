@@ -1474,6 +1474,7 @@ var Game = function () {
     this.timer = null;
     this.food = [];
     this.ratio = 1;
+    this.isGameOver = false;
     this.screens = {
       gameover: new _gameover2.default(document.querySelector(".js-gameover"))
     };
@@ -1519,6 +1520,7 @@ var Game = function () {
       this.closeScreens();
       this.snake.reset();
       this.food = [];
+      this.isGameOver = false;
     }
   }, {
     key: "registerActions",
@@ -1576,7 +1578,9 @@ var Game = function () {
   }, {
     key: "gameover",
     value: function gameover() {
+      this.isGameOver = true;
       this.stop();
+      this.snake.move(_snake.MOVE_IDLE);
 
       this.screens.gameover.enable();
 
@@ -1641,7 +1645,11 @@ var Game = function () {
   }, {
     key: "update",
     value: function update() {
-      // Update all the things...
+      // Only update game elements if we are playing
+      if (this.isGameOver) {
+        return;
+      }
+
       this.snake.update(this.frameDelta);
 
       if (!this.food.length) {
@@ -1787,7 +1795,7 @@ exports.default = Grid;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Snake = exports.MOVE_LEFT = exports.MOVE_RIGHT = exports.MOVE_UP = exports.MOVE_DOWN = undefined;
+exports.Snake = exports.MOVE_IDLE = exports.MOVE_LEFT = exports.MOVE_RIGHT = exports.MOVE_UP = exports.MOVE_DOWN = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *  Snake
@@ -1809,6 +1817,7 @@ var MOVE_DOWN = exports.MOVE_DOWN = [0, 1];
 var MOVE_UP = exports.MOVE_UP = [0, -1];
 var MOVE_RIGHT = exports.MOVE_RIGHT = [1, 0];
 var MOVE_LEFT = exports.MOVE_LEFT = [-1, 0];
+var MOVE_IDLE = exports.MOVE_IDLE = [0, 0];
 
 var Snake = exports.Snake = function () {
   function Snake(game) {

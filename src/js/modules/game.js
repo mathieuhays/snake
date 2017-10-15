@@ -3,7 +3,7 @@
  */
 
 import Grid from "./grid";
-import { Snake, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, MOVE_UP } from "./snake";
+import { Snake, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, MOVE_UP, MOVE_IDLE } from "./snake";
 import Food from "./food";
 import { getBackingStorePixelRatio, getDevicePixelRatio, on } from "./utils";
 import { onKeyPress, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT, ARROW_UP } from "./keyboard";
@@ -26,6 +26,7 @@ export default class Game {
     this.timer = null;
     this.food = [];
     this.ratio = 1;
+    this.isGameOver = false;
     this.screens = {
       gameover: new Gameover(document.querySelector(".js-gameover"))
     };
@@ -66,6 +67,7 @@ export default class Game {
     this.closeScreens();
     this.snake.reset();
     this.food = [];
+    this.isGameOver = false;
   }
 
   registerActions() {
@@ -115,7 +117,9 @@ export default class Game {
   }
 
   gameover() {
+    this.isGameOver = true;
     this.stop();
+    this.snake.move(MOVE_IDLE);
 
     this.screens.gameover.enable();
 
@@ -171,7 +175,11 @@ export default class Game {
   }
 
   update() {
-    // Update all the things...
+    // Only update game elements if we are playing
+    if (this.isGameOver) {
+      return;
+    }
+
     this.snake.update(this.frameDelta);
 
     if (!this.food.length) {
