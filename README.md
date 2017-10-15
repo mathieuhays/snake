@@ -4,7 +4,7 @@ Simple version of the snake game.
 I might change some of the game logic
 later to differ a little bit from the original.
 
-This game is not yet fully functional.
+The implementation isn't very sexy right now. Futur refactor will most likely improve this.
 
 ## Development
 
