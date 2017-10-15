@@ -10,6 +10,15 @@
 	<script>!function(){"use strict";function e(){var e=document.getElementsByTagName("script")[0],l=document.createElement("script");l.async=!0,l.src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default&callback=MH.polyfillReady",e.parentNode.insertBefore(l,e)}function l(){n.polyfillReady=!0}var n={done:!1,callbacks:[],pointer:null,intervalTiming:100,polyfillReady:!1};"keys"in Object?l():e(),n.pointer=setInterval(function(){"complete"!==document.readyState&&"interactive"!==document.readyState||!n.polyfillReady||(clearInterval(n.pointer),n.done=!0,n.callbacks.length&&n.callbacks.forEach(function(e){e()}))},n.intervalTiming),window.MH={onReady:function(e){n.done?e():n.callbacks.push(e)},polyfillReady:l}}();</script>
   <!-- main code -->
   <script src="dist/js/bundle.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23697840-8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-23697840-8', { 'anonymize_ip': true });
+  </script>
 </head>
 <body>
   <div class="wrapper">
